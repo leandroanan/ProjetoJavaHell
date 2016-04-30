@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,18 +15,23 @@ import java.sql.SQLException;
  * @author AX4B
  */
 public class Conexao {
-    
-    public static Connection obterConexao() throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        // Passo 1: Registrar driver JDBC.
-        Class.forName("org.apache.derby.jdbc.ClientDataSource");
 
-        // Passo 2: Abrir a conexão
-        conn = DriverManager.getConnection(
-                "jdbc:derby://localhost:1527/JavaHell;SecurityMechanism=3",
-                "", // usuario
-                ""); // senha
-        return conn;
+    public static Connection abrirConexao() {
+        
+        try {
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection(
+            "jdbc:sqlite:C:\\Users\\AX4B\\Documents\\JavaHell.db");
+            conn.setAutoCommit(false);
+            System.out.println("Conectado com banco");
+            return conn;
+        } catch (ClassNotFoundException | SQLException | HeadlessException e) {
+            System.out.println("nao conectado com banco");
+            System.out.println(e);
+            return null;
+        }
     }
-    
+
 }
+
+
