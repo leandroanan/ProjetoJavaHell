@@ -16,8 +16,7 @@ import java.sql.SQLException;
  */
 public class Conexao {
 
-    public static Connection abrirConexao() {
-        
+    public static Connection abreConexao() {        
         try {
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection(
@@ -31,7 +30,10 @@ public class Conexao {
             return null;
         }
     }
+    
+    public static void fechaConexao(Connection conn) throws SQLException{
+        conn.commit();
+        conn.close();
+    }
 
 }
-
-
