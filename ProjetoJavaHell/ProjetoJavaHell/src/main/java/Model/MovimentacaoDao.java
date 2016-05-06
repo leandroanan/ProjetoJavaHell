@@ -75,7 +75,6 @@ public class MovimentacaoDao {
             this.prepareStmt.setString(2, this.getTipo_movimentacao());
             this.prepareStmt.setInt(3, this.getId_funcionario());
             this.prepareStmt.setInt(4, this.getId_produto());
-            this.movimentaProduto();
         }
         catch(Exception e){
             System.out.println("Erro ao movimentar estoque: " + e);
