@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="Funcionario.css"/>
+        <script src="Funcionario.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="interface">
@@ -31,10 +32,9 @@
                         <p>Nome : <input type="text" name="nome" id="nomeId" placeholder="Nome do Produto"/></p>
                         <p>Tamanho : <input type="text" name="tamanho" id="tamanhoId" placeholder="Tamanho do Produto"/></p>
                         <p>Quantidade : <input type="text" name="quantidade" id="quantidadeId" placeholder="Quantidade do Produto"/></p>    
-                        <button name="cadastrar" id="cadastrar">Cadastrar</button>
+                        <button name="cadastrar" onClick="alert('Cadastro feito'); return true" id="cadastrar">Cadastrar</button>
                     </fieldset>
                 </form>
-
             </section>
 
             <aside id="menuLateral">

@@ -7,6 +7,7 @@ package Controller;
 
 import Model.ProdutosDao;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,11 +51,10 @@ public class CadastraProdServlet extends HttpServlet {
         }
         catch(NumberFormatException | SQLException e){
             System.out.println("Erro: " + e);
-        }
+        }        
         RequestDispatcher rd = request.getRequestDispatcher("CadastraProd.jsp");
         rd.forward(request, response);
     }
-
     
     @Override
     public String getServletInfo() {

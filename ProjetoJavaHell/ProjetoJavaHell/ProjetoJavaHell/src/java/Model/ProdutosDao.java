@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
@@ -26,13 +25,13 @@ public class ProdutosDao {
     private String nome;
     private String tamanho;
     private int quantidade;
-    private String id_produto;
+    private int id_produto;
 
-    public String getId_produto() {
+    public int getId_produto() {
         return id_produto;
     }
 
-    public void setId_produto(String id_produto) {
+    public void setId_produto(int id_produto) {
         this.id_produto = id_produto;
     }
     
@@ -134,23 +133,41 @@ public class ProdutosDao {
     //CADASTRAR PRODUTO
     public void cadastrarProduto() throws SQLException{
         try{
+            this.getCodOperacaoDisp();
             this.conn = Conexao.abreConexao();
-            this.sql = "INSERT INTO PRODUTO (CATEGORIA, NOME, TAMANHO, QUANTIDADE)"
+            this.sql = "INSERT INTO PRODUTO (ID_PRODUTO, CATEGORIA, NOME, TAMANHO, QUANTIDADE)"
                     + "values (?,?,?,?,?)";
             this.prepareStmt = this.conn.prepareStatement(this.sql);
-            this.prepareStmt.setInt(1, 1);
+            this.prepareStmt.setInt(1, this.getId_produto());
             this.prepareStmt.setString(2, this.getCategoria());
             this.prepareStmt.setString(3, this.getNome());
             this.prepareStmt.setString(4, this.getTamanho());
             this.prepareStmt.setInt(5, this.getQuantidade());
-            
+            this.prepareStmt.executeUpdate();
         }
         catch(Exception e){
             System.out.println("Erro ao cadastrar produto: " + e);
         }
         finally{
-            Conexao.fechaConexao(conn);
             this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
+        }
+    }
+    
+    //Verificar o proximo id de produto disponivel
+    public void getCodOperacaoDisp() throws SQLException {
+        try {
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT MAX(ID_PRODUTO) from PRODUTO";
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            this.setId_produto(this.resultSet.getInt(1) + 1);
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println("Erro: " + e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
         }
     }
     
