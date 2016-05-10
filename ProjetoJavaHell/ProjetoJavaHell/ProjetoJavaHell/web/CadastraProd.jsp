@@ -20,8 +20,8 @@
 
             </header>
 
-            <header id="menuDinamico">
-
+            <header id="menuDinamico" align="center">
+                <img src="_imagens/cadastraProd.jpg" width="400" height="100"/>
             </header>
 
             <section id="corpo">

@@ -12,6 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="Funcionario.css"/>
+        <script language="javascript" src="Funcionario.js"></script>
     </head>
     <body>
         <div id="interface">
@@ -19,13 +20,13 @@
 
             </header>
 
-            <header id="menuDinamico">
-
+            <header id="menuDinamico" align="center">
+                <img src="_imagens/cadastraFunc.jpg" width="400" height="100"/>
             </header>
 
             <section id="corpo">
                 <header id="rodape">
-                    <form name="cadastraFunc" method="post" id="cadastraProdForm" action="CadastrarFuncionarioServlet">
+                    <form name="cadastraFunc" method="post" id="cadastraFuncForm" action="CadastrarFuncServlet">
                         <div class="cadastra">
                             <p id="tituloCadastraFunc">Cadastro de Funcionário</p>
                             <fieldset id="geral">
@@ -34,20 +35,21 @@
                                 <span><br><br>Cpf</span>	
                                 <input type="text" class="input_text" name="cpf" id="cpfCode" placeholder="Seu cpf"/>
                                 <span><br><br>Idade</span>	
-                                <input type="text" class="input_text" name="iade" id="age" placeholder="Sua idade"/><br>   
+                                <input type="text" class="input_text" name="idade" id="age" placeholder="Sua idade"/><br>   
                                 <span>Sexo</span>	
-                                <input type="radio" name="masculino" value="male" checked>Masculino<br>
+                                <input type="radio" name="masculino" value="male" checked>Masculino
                                 <input type="radio" name="feminino" value="female"> Feminino<br>
                                 <span>Cargo</span>	
-                                <input type="text" class="input_text" name="funcao" id="function" placeholder="Seu cargo"/>
+                                <input type="text" class="input_text" name="cargo" id="function" placeholder="Seu cargo"/><br>
+                                <button name="cadastrar" onClick="alert('Cadastro feito'); return true" id="cadastrar">Cadastrar</button>
                             </fieldset>                        
                         </div>
-                    </form> 
+                    </form>  
                 </header>
             </section>
 
             <aside id="menuLateral">
-                <ul>
+                <ul id="idBotoes">
                     <li><a href="http://localhost:8080/ProjetoJavaHell/CadastraProd.jsp">CADASTRAR<br>PRODUTO</a></li>
                     <li><a href="http://localhost:8080/ProjetoJavaHell/AlteraProd.jsp">ALTERAR<br>PRODUTO</a></li>
                     <li><a href="http://localhost:8080/ProjetoJavaHell/RemoveProd.jsp">REMOVER<br>PRODUTO</a></li>

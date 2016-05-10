@@ -5,8 +5,13 @@
  */
 package Controller;
 
+import Model.FuncionarioDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author AX4B
  */
-@WebServlet(name = "cadastraFunc", urlPatterns = {"/cadastraFunc"})
-public class CadastraFunc extends HttpServlet {
+@WebServlet(name = "CadastraFuncServlet", urlPatterns = {"/CadastraFuncServlet"})
+public class CadastraFuncServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,6 +78,21 @@ public class CadastraFunc extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        FuncionarioDao obj = new FuncionarioDao();
+        try{            
+            obj.setNome(request.getParameter("nome"));
+            obj.setCpf(request.getParameter("cpf"));
+            obj.setIdade(Integer.parseInt(request.getParameter("idade")));
+            obj.setCargo(request.getParameter("cargo"));
+            obj.cadastrarFuncionario();
+        }
+        catch(NumberFormatException e){
+            System.out.println("Erro: " + e);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastraFuncServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("CadastraFunc.jsp");
+        rd.forward(request, response);
     }
 
     /**

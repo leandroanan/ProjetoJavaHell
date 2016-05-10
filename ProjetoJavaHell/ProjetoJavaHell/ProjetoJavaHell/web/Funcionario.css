@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 div#interface {
+    background: #FFD700;
     width: 900px;
     height: 1000px;
     margin: -20px/*direita*/auto/*baixo*/0px/*esquerda*/auto;
@@ -24,6 +25,7 @@ header#cabecalho{
 header#menuDinamico{
     border-bottom:/*largura*/1px /*cor*/#606060 /*formato da borda*/solid;/*linha do cabeçalho*/
     height: 100px;
+    background: #FF0000;
 }
 
 section#corpo {
@@ -65,13 +67,10 @@ li ul {
 ul li a {
     display: block;
     text-decoration: none;
-    color: black;
-    background: #fff;
+    color: #FFFF00;
+    background: #FF0000;
     padding: 5px;
     border: 1px solid #ccc;
+    text-align: center;
 }
-
-
-
-
 

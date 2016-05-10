@@ -7,6 +7,7 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,13 +17,15 @@ import java.sql.SQLException;
 public class FuncionarioDao {
     private Connection conn;
     private String sql;
+    private ResultSet resultSet;
     private PreparedStatement prepareStmt;
     private String nome;
     private String cpf;
     private int idade;
     private String cargo;
     private String sexo;
-
+    private int id_funcionario;
+    
     public String getNome() {
         return nome;
     }
@@ -31,6 +34,14 @@ public class FuncionarioDao {
         this.nome = nome;
     }
 
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
+    
     public String getCpf() {
         return cpf;
     }
@@ -66,10 +77,12 @@ public class FuncionarioDao {
     //CADASTRAR FUNCIONÁRIO
     public void cadastrarFuncionario() throws SQLException{
         try{
+            this.getIdFuncionario();
             this.conn = Conexao.abreConexao();
-            this.sql = "INSERT INTO FUNCIONARIO (NOME, CPF, IDADE, CARGO, SEXO)"
-                    + "values (?,?,?,?,?)";
+            this.sql = "INSERT INTO FUNCIONARIO (ID_FUNCIONARIO, NOME, CPF, IDADE, CARGO, SEXO)"
+                    + "values (?,?,?,?,?,?)";
             this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.prepareStmt.setInt(1, this.getId_funcionario());
             this.prepareStmt.setString(2, this.getNome());
             this.prepareStmt.setString(3, this.getCpf());
             this.prepareStmt.setInt(4, this.getIdade());
@@ -82,6 +95,23 @@ public class FuncionarioDao {
         finally{
             Conexao.fechaConexao(conn);
             this.prepareStmt.close();
+        }
+    }
+    
+    //Verificar o proximo id de funcionario disponivel
+    public void getIdFuncionario() throws SQLException {
+        try {
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT MAX(ID_FUNCIONARIO) from FUNCIONARIO";
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            this.setId_funcionario(this.resultSet.getInt(1) + 1);
+        } catch (SQLException | NumberFormatException e) {
+            System.out.println("Erro: " + e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
         }
     }
     
