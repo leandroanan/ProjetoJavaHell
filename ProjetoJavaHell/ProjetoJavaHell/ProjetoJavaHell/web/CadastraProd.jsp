@@ -20,7 +20,7 @@
         </div>
         <div id="interface">
             <header id="cabecalho">
-
+                <img src="_imagens/logo.jpg "/>
             </header>
 
             <header id="menuDinamico" align="center">

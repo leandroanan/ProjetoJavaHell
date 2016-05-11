@@ -29,10 +29,11 @@ div#interface {
 }
 
 header#cabecalho{
-    border-bottom:/*largura*/1px /*cor*/#606060 /*formato da borda*/solid;/*linha do cabeçalho*/
     height: 150px;
     width: 900px;
     position: relative;
+    padding-top: 5px;
+    margin-bottom: -15px;
 }
 
 header#imagemFundo{
@@ -42,9 +43,9 @@ header#imagemFundo{
 
 
 header#menuDinamico{
-    border-bottom:/*largura*/1px /*cor*/#606060 /*formato da borda*/solid;/*linha do cabeçalho*/
-    height: 100px;
+    height: 110px;
     background: #FF0000;
+    margin-top: 0px;
 }
 
 section#corpo {
@@ -93,3 +94,13 @@ ul li a {
     text-align: center;
 }
 
+ul li a:hover{
+    display: block;
+    text-decoration: none;
+    color: #FF0000;
+    background: #000000;
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    transition: 1s;
+}
