@@ -15,9 +15,12 @@
         <script language="javascript" src="Funcionario.js"></script>
     </head>
     <body>
+        <div id="imagemFundo">
+            <img src="_imagens/fastFood01.jpg"/>
+        </div>
         <div id="interface">
             <header id="cabecalho">
-
+                
             </header>
 
             <header id="menuDinamico" align="center">

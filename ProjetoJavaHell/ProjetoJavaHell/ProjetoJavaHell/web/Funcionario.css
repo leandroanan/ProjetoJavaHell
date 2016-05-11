@@ -8,11 +8,22 @@ and open the template in the editor.
     Author     : AX4B
 */
 
+div#imagemFundo{
+    background-repeat: no-repeat;
+    display: block;
+    height: 0px;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-bottom: -10px;
+}
+
 div#interface {
+    position: relative;
     background: #FFD700;
+    overflow: hidden;
     width: 900px;
     height: 1000px;
-    margin: -20px/*direita*/auto/*baixo*/0px/*esquerda*/auto;
+    margin: auto/*direita*/auto/*baixo*/auto/*esquerda*/auto;
     box-shadow: /*Deslocamento lateral*/0px /*Deslocamento vertical*/0px /*Espalhamento da sombra*/10px /*Cor da sombra*/rgba(0,0,0,.5);
     padding: 10px/*como todas as margens sao de 10px o parametro é passado uma unica vez*/;
 }
@@ -20,7 +31,15 @@ div#interface {
 header#cabecalho{
     border-bottom:/*largura*/1px /*cor*/#606060 /*formato da borda*/solid;/*linha do cabeçalho*/
     height: 150px;
+    width: 900px;
+    position: relative;
 }
+
+header#imagemFundo{
+    height: 150px;
+    position: relative;
+}
+
 
 header#menuDinamico{
     border-bottom:/*largura*/1px /*cor*/#606060 /*formato da borda*/solid;/*linha do cabeçalho*/

@@ -14,6 +14,9 @@
         <link rel="stylesheet" type="text/css" href="Funcionario.css"/>
     </head>
     <body>
+        <div id="imagemFundo">
+            <img src="_imagens/fastFood01.jpg"/>
+        </div>
         <div id="interface">
             <header id="cabecalho">
 

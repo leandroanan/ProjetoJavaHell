@@ -15,6 +15,9 @@
         <script src="Funcionario.js" type="text/javascript"></script>
     </head>
     <body>
+        <div id="imagemFundo">
+            <img src="_imagens/fastFood01.jpg"/>
+        </div>
         <div id="interface">
             <header id="cabecalho">
 
