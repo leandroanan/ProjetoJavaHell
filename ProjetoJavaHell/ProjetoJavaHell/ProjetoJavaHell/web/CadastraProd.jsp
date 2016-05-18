@@ -4,7 +4,7 @@
     Author     : AX4B
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,11 +31,11 @@
                 <form method="post" action=" ${pageContext.request.contextPath}/CadastraProdServlet" method="post">
                     <p id="tituloCadastraProd">Cadastro de Produto</p>
                     <fieldset>
-                        <p>Categoria : <input type="text" name="categoria" id="categoriaId" placeholder="Categoria do Produto"/></p>
-                        <p>Nome : <input type="text" name="nome" id="nomeId" placeholder="Nome do Produto"/></p>
-                        <p>Tamanho : <input type="text" name="tamanho" id="tamanhoId" placeholder="Tamanho do Produto"/></p>
-                        <p>Quantidade : <input type="text" name="quantidade" id="quantidadeId" placeholder="Quantidade do Produto"/></p>    
-                        <button name="cadastrar" onClick="alert('Cadastro feito'); return true" id="cadastrar">Cadastrar</button>
+                        </br><p>Categoria: </p><input type="text" name="categoria" required="required" id="categoriaId" placeholder="Categoria do Produto"/>
+                        </br><p>Nome: </p><input type="text" name="nome" required="required" id="nomeId" placeholder="Nome do Produto"/>
+                        </br><p>Tamanho: </p><input type="text" name="tamanho" required="required" id="tamanhoId" placeholder="Tamanho do Produto"/>
+                        </br><p>Quantidade: </p><input type="text" name="quantidade" required="required" pattern="[0-9]+$" id="quantidadeId" placeholder="Quantidade do Produto"/>    
+                        </br></br><button name="cadastrar" id="cadastrar">Cadastrar</button>
                     </fieldset>
                 </form>
             </section>

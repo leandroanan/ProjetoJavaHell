@@ -1,6 +1,6 @@
 <%-- 
-    Document   : geraRelatorio
-    Created on : 06/05/2016, 21:03:49
+    Document   : VendProdServlet
+    Created on : 18/05/2016, 15:19:31
     Author     : AX4B
 --%>
 
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gerar relatório</title>
+        <title>Vender produto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="Funcionario.css"/>
@@ -23,19 +23,22 @@
             </header>
 
             <header id="menuDinamico" align="center">
-                <img src="_imagens/geraRel.jpg" width="400" height="100"/>
+                <img src="_imagens/vendeProd.jpg" width="400" height="100"/>
             </header>
 
             <section id="corpo">
-                <p id="tituloGeraRelatorio">Gerar Relatorio</p>
-                <form method="post" action="GeraRelatorioServlet">
-                    <select name="tipoRelatorio">
-                        <option value="listarProdutos" selected="selected">Listar Produtos</option>
-                        <option value="listarFuncionarios">Listar Funcionários</option>
-                        <option value="listarMovimentacoes">Listar Movimentações</option>
-                    </select>
-                    <input type="submit" value='Pesquisar'/>
-                </form>               
+                <p id="tituloVendeProd">Vender Produto</p>
+                <form method="post" action="VendProdServlet">
+                    <p id="VendProdServlet">Alterar Produto</p>
+                    <fieldset>
+                        <p>Id</p><input type="text" name="id" value="${requestScope.id}" value="Id" readonly="readonly"/>
+                        </br></br><p>Categoria</p><input type="text" required="required" placeholder="Digite a categoria" name="categoria" value="${requestScope.categoria}" value="Categoria" />
+                        </br></br><p>Nome</p><input type="text" required="required" placeholder="Digite o nome" name="nome" value="${requestScope.nome}" value="Nome" />
+                        </br></br><p>Tamanho</p><input type="text" required="required" placeholder="Digigte o tamanho" name="tamanho" value="${requestScope.tamanho}" value="Tamanho" />
+                        </br></br><p>Quantidade</p><input type="text" required="required" placeholder="Digite a quantidade" name="quantidade" value="${requestScope.quantidade}" value="Quantidade" />
+                        </br></br><p></p><input type="submit" value='Alterar'/>
+                    </fieldset>
+                </form>
             </section>
 
             <aside id="menuLateral">

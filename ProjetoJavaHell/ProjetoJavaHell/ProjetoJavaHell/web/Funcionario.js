@@ -4,6 +4,3 @@
  * and open the template in the editor.
  */
 
-function mudaCorBotoes(){
-    document.getElementById('menuLateral').style.backgroundColor = 'blue';
-}

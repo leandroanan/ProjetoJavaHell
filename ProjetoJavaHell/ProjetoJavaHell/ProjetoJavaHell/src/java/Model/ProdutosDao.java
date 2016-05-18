@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,7 +27,16 @@ public class ProdutosDao {
     private String tamanho;
     private int quantidade;
     private int id_produto;
+    private ArrayList<String> produtos;
 
+    public ProdutosDao() {
+        this.produtos = new ArrayList();
+    }
+    
+    public ArrayList<String> getProdutos() {
+        return produtos;
+    }
+        
     public int getId_produto() {
         return id_produto;
     }
@@ -71,20 +81,19 @@ public class ProdutosDao {
     public void alteraProduto() throws SQLException{
         try{
             this.conn = Conexao.abreConexao();
-            this.sql = "UPDATE PRODUTO"
-                    + "SET CATEGORIA = " + this.getCategoria()
-                    + "SET NOME = " + this.getNome()
-                    + "SET TAMANHO = " + this.getTamanho()
-                    + "SET QUANTIDADE = " + this.getQuantidade()
-                    + "WHERE ID_PRODUTO = " + this.getId_produto();
-            this.state = this.conn.createStatement();
-            this.state.execute(this.sql);
+            sql = "UPDATE PRODUTO SET CATEGORIA = '"+this.getCategoria().toUpperCase()
+                    +"', NOME = '"+this.getNome().toUpperCase()
+                    +"', QUANTIDADE = '"+this.getQuantidade()
+                    +"', TAMANHO = '"+this.getTamanho().toUpperCase()+"'"
+                    +" WHERE ID_PRODUTO = '"+Integer.toString(this.getId_produto())+"'";
+            state = this.conn.createStatement();
+            state.executeUpdate(sql);
+            state.close();
         }
         catch(Exception e){
             System.out.println("Erro ao alterar produto: " + e);
         }
         finally{
-            this.state.close();
             Conexao.fechaConexao(this.conn);
         }            
     }
@@ -105,30 +114,6 @@ public class ProdutosDao {
         }
     }
     
-    //PESQUISAR PRODUTO
-    public void pesquisaProduto() throws SQLException{
-        try{
-            this.conn = Conexao.abreConexao();
-            this.sql = "SELECT * FROM PRODUTO"
-                     + "WHERE PRODUTO LIKE " + "%" + this.getNome() + "%";
-            this.prepareStmt = this.conn.prepareStatement(this.sql);
-            this.resultSet = this.prepareStmt.executeQuery();
-            while(this.resultSet.next()){
-                this.setCategoria(this.resultSet.getString(2));
-                this.setNome(this.resultSet.getString(3));
-                this.setQuantidade(this.resultSet.getInt(4));
-                this.setTamanho(this.resultSet.getString(5));
-            }
-        }
-        catch(Exception e){
-            System.out.println("Erro ao pesquisar produto: " + e);
-        }
-        finally{
-            this.resultSet.close();
-            this.prepareStmt.close();
-            Conexao.fechaConexao(this.conn);
-        }
-    }
     
     //CADASTRAR PRODUTO
     public void cadastrarProduto() throws SQLException{
@@ -139,9 +124,9 @@ public class ProdutosDao {
                     + "values (?,?,?,?,?)";
             this.prepareStmt = this.conn.prepareStatement(this.sql);
             this.prepareStmt.setInt(1, this.getId_produto());
-            this.prepareStmt.setString(2, this.getCategoria());
-            this.prepareStmt.setString(3, this.getNome());
-            this.prepareStmt.setString(4, this.getTamanho());
+            this.prepareStmt.setString(2, this.getCategoria().toUpperCase());
+            this.prepareStmt.setString(3, this.getNome().toUpperCase());
+            this.prepareStmt.setString(4, this.getTamanho().toUpperCase());
             this.prepareStmt.setInt(5, this.getQuantidade());
             this.prepareStmt.executeUpdate();
         }
@@ -170,5 +155,54 @@ public class ProdutosDao {
             Conexao.fechaConexao(conn);
         }
     }
+
+    //SELECIONA LISTA DE PRODUTOS NO ARRAYLIST
+    public void insereListaProdutos() throws SQLException{
+        try{
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT * from PRODUTO";
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            
+            while(this.resultSet.next()){
+                this.produtos.add("Id: " + this.resultSet.getString(1)
+                                +", Categoria: " + this.resultSet.getString(2)
+                                +", Nome: " + this.resultSet.getString(3)
+                                +", Tamanho: " + this.resultSet.getString(4)
+                                +", Quantidade: " + this.resultSet.getInt(5));
+            }
+        }
+        catch(Exception e){
+            System.out.println("\nErro ao selecionar lista de produtos: " + e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
+        }
+    }
     
+    //SELECIONA PRODUTO POR CODIGO DE ID_PRODUTO
+    public void selecionaProduto() throws SQLException{
+        try{
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT * FROM PRODUTO WHERE PRODUTO.ID_PRODUTO = " + this.getId_produto();
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            
+            while(this.resultSet.next()){
+                this.setId_produto(this.resultSet.getInt(1));
+                this.setCategoria(this.resultSet.getString(2));
+                this.setNome(this.resultSet.getString(3));
+                this.setTamanho(this.resultSet.getString(4));
+                this.setQuantidade(this.resultSet.getInt(5));
+            }
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
+        }
+    }
 }

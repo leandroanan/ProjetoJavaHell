@@ -4,7 +4,7 @@
     Author     : AX4B
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,8 +30,8 @@
                 <p id="tituloRemoveProd">Remover Produto</p>
                 <form method="post" action="RemoverProdutoServlet">
                     <fieldset>
-                        <p>Nome do Produto : <input type="text" name="nomeProduto" id="produto" placeholder="Produto a ser Removido"/>
-                            <button name="validadar" id="validar">Validar</button></p>
+                        <p>Codigo do Produto: <input type="text" required="required" pattern="[0-9]+$" name="nomeProduto" id="produto" placeholder="Produto a ser Removido"/>
+                            <input type="submit" value='Deletar'/>
                     </fieldset>
                 </form>
             </section>

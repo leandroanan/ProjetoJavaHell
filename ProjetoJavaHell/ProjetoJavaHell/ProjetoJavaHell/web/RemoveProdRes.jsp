@@ -1,6 +1,6 @@
 <%-- 
-    Document   : geraRelatorio
-    Created on : 06/05/2016, 21:03:49
+    Document   : RemoveProdRes
+    Created on : 16/05/2016, 11:16:10
     Author     : AX4B
 --%>
 
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gerar relatório</title>
+        <title>Remover produto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="Funcionario.css"/>
@@ -23,19 +23,25 @@
             </header>
 
             <header id="menuDinamico" align="center">
-                <img src="_imagens/geraRel.jpg" width="400" height="100"/>
+                <img src="_imagens/removeProd.jpg" width="400" height="100"/>
             </header>
 
             <section id="corpo">
-                <p id="tituloGeraRelatorio">Gerar Relatorio</p>
-                <form method="post" action="GeraRelatorioServlet">
-                    <select name="tipoRelatorio">
-                        <option value="listarProdutos" selected="selected">Listar Produtos</option>
-                        <option value="listarFuncionarios">Listar Funcionários</option>
-                        <option value="listarMovimentacoes">Listar Movimentações</option>
-                    </select>
-                    <input type="submit" value='Pesquisar'/>
-                </form>               
+                <p id="tituloRemoveProd">Remover Produto</p>
+                <form method="post" action="RemoverProdutoServlet">
+                    <%
+                        int id = Integer.parseInt(request.getAttribute("id").toString());
+                        String categoria = request.getAttribute("categoria").toString();
+                        String nome = request.getAttribute("nome").toString();
+                        String tamanho = request.getAttribute("tamanho").toString();
+                        int quantidade = Integer.parseInt(request.getAttribute("quantidade").toString());
+                        out.print("Id: " + id);
+                        out.print(", categoria: " + categoria);
+                        out.print(", nome: " + nome);
+                        out.print(", tamanho: " + tamanho);
+                        out.print(", quantidade: " + quantidade + ", removido com sucesso!!!");
+                    %>
+                </form>
             </section>
 
             <aside id="menuLateral">

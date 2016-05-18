@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,6 +26,15 @@ public class FuncionarioDao {
     private String cargo;
     private String sexo;
     private int id_funcionario;
+    private ArrayList<String> funcionarios;
+
+    public FuncionarioDao() {
+        this.funcionarios = new ArrayList();
+    }
+
+    public ArrayList<String> getFuncionarios() {
+        return funcionarios;
+    }
     
     public String getNome() {
         return nome;
@@ -83,11 +93,12 @@ public class FuncionarioDao {
                     + "values (?,?,?,?,?,?)";
             this.prepareStmt = this.conn.prepareStatement(this.sql);
             this.prepareStmt.setInt(1, this.getId_funcionario());
-            this.prepareStmt.setString(2, this.getNome());
-            this.prepareStmt.setString(3, this.getCpf());
+            this.prepareStmt.setString(2, this.getNome().toUpperCase());
+            this.prepareStmt.setString(3, this.getCpf().toUpperCase());
             this.prepareStmt.setInt(4, this.getIdade());
-            this.prepareStmt.setString(5, this.getCargo());
-            this.prepareStmt.setString(6, this.getSexo());            
+            this.prepareStmt.setString(5, this.getCargo().toUpperCase());
+            this.prepareStmt.setString(6, this.getSexo().toUpperCase());  
+            this.prepareStmt.executeUpdate();
         }
         catch(Exception e){
             System.out.println("Erro ao cadastrar funcionario: " + e);
@@ -108,6 +119,32 @@ public class FuncionarioDao {
             this.setId_funcionario(this.resultSet.getInt(1) + 1);
         } catch (SQLException | NumberFormatException e) {
             System.out.println("Erro: " + e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
+        }
+    }
+    
+    //SELECIONA LISTA DE FUNCIONARIOS NO ARRAYLIST
+    public void insereListaFuncionarios() throws SQLException{
+        try{
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT * from FUNCIONARIO";
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            
+            while(this.resultSet.next()){
+                this.funcionarios.add("ID: " + this.resultSet.getString(1)
+                                    + ", Nome: " + this.resultSet.getString(2)
+                                    + ", CPF: " + this.resultSet.getString(3)
+                                    + ", Idade: " + this.resultSet.getInt(4)
+                                    + ", Cargo: " + this.resultSet.getString(5)
+                                    + ", Sexo: " + this.resultSet.getString(6));
+            }
+        }
+        catch(Exception e){
+            System.out.println("\nErro ao selecionar lista de funcionarios: " + e);
         }
         finally{
             this.prepareStmt.close();

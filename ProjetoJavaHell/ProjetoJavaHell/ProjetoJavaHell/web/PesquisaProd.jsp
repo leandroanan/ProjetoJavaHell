@@ -1,10 +1,10 @@
 <%-- 
-    Document   : pesquisaProd
-    Created on : 06/05/2016, 21:04:21
+    Document   : PesquisaProd
+    Created on : 18/05/2016, 16:04:23
     Author     : AX4B
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,11 +27,11 @@
             </header>
 
             <section id="corpo">
-                <p id="tituloPesquisarProd">Pesquisar Produto</p>
                 <form method="post" action="PesquisarProdutoServlet">
+                    <p id="tituloAlteraProd">Pesquisar Produto</p>
                     <fieldset>
-                        <p>Nome do Produto : <input type="text" name="nomeProduto" id="produto" placeholder="Produto a se Pesquisar"/>
-                            <button name="validate" id="validar">Validar</button></p>
+                        <p>Nome do Produto: <input type="text" required="required" pattern="[0-9]+$" name="nomeProduto" id="produto" placeholder="Produto a ser pesquisado"/>
+                            <input type="submit" value='Pesquisar'/>
                     </fieldset>
                 </form>
             </section>

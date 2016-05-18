@@ -1,9 +1,10 @@
 <%-- 
-    Document   : geraRelatorio
-    Created on : 06/05/2016, 21:03:49
+    Document   : GeraRelatorioRes
+    Created on : 15/05/2016, 18:16:24
     Author     : AX4B
 --%>
 
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -29,14 +30,14 @@
             <section id="corpo">
                 <p id="tituloGeraRelatorio">Gerar Relatorio</p>
                 <form method="post" action="GeraRelatorioServlet">
-                    <select name="tipoRelatorio">
-                        <option value="listarProdutos" selected="selected">Listar Produtos</option>
-                        <option value="listarFuncionarios">Listar Funcionários</option>
-                        <option value="listarMovimentacoes">Listar Movimentações</option>
-                    </select>
-                    <input type="submit" value='Pesquisar'/>
-                </form>               
-            </section>
+                    <%
+                        List<String> result = (List<String>) request.getAttribute("lista");
+                        for (String temp : result) {
+                            out.print("</br>" + temp);
+                        }
+                    %>
+                </form>
+            </section>              
 
             <aside id="menuLateral">
                 <ul>

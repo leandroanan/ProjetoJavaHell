@@ -4,7 +4,7 @@
     Author     : AX4B
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,22 +29,18 @@
 
             <section id="corpo">
                 <header id="rodape">
-                    <form name="cadastraFunc" method="post" id="cadastraFuncForm" action="CadastrarFuncServlet">
+                    <form method="post" action=" ${pageContext.request.contextPath}/CadastraFuncServlet" method="post">
                         <div class="cadastra">
                             <p id="tituloCadastraFunc">Cadastro de Funcionário</p>
-                            <fieldset id="geral">
-                                <span>Nome Completo</span>	
-                                <input type="text" class="input_text" name="nome" id="name" placeholder="Seu nome completo"/>
-                                <span><br><br>Cpf</span>	
-                                <input type="text" class="input_text" name="cpf" id="cpfCode" placeholder="Seu cpf"/>
-                                <span><br><br>Idade</span>	
-                                <input type="text" class="input_text" name="idade" id="age" placeholder="Sua idade"/><br>   
-                                <span>Sexo</span>	
-                                <input type="radio" name="masculino" value="male" checked>Masculino
-                                <input type="radio" name="feminino" value="female"> Feminino<br>
-                                <span>Cargo</span>	
-                                <input type="text" class="input_text" name="cargo" id="function" placeholder="Seu cargo"/><br>
-                                <button name="cadastrar" onClick="alert('Cadastro feito'); return true" id="cadastrar">Cadastrar</button>
+                            <fieldset id="geral">                              
+                                <p>Nome</p><input type="text" name="nome" required="required" pattern="[a-z\s]+$" id="name" placeholder="Seu nome completo"/>
+                                </br><p>CPF</p><input type="text" name="cpf" id="cpfCode" placeholder="Seu cpf"/>                              	
+                                </br><p>Idade</p><input type="text" required="required" pattern="[0-9]+$" name="idade" id="age" placeholder="Sua idade"/><br>   
+                                <p>Sexo</p>
+                                <input type="radio" name="sexo" value="Masculino" checked>Masculino
+                                <input type="radio" name="sexo" value="Feminino"> Feminino            	
+                                </br><p>Cargo</p><input type="text" name="cargo" required="required" pattern="[a-z\s]+$" id="function" placeholder="Seu cargo"/><br>
+                                </br><button name="cadastrar" id="cadastrar">Cadastrar</button>
                             </fieldset>                        
                         </div>
                     </form>  
@@ -63,7 +59,7 @@
                 </ul>
             </aside>
             <footer id="rodape">
-            <p>Copyright<!--Simbolo copyright -->&copy; 2016 - BY JAVAHELL TEAM<br></p>
+                <p>Copyright<!--Simbolo copyright -->&copy; 2016 - BY JAVAHELL TEAM<br></p>
             </footer>>
         </div>
     </body>

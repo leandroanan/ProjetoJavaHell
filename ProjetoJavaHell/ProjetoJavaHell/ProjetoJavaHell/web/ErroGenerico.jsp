@@ -1,10 +1,10 @@
 <%-- 
-    Document   : geraRelatorio
-    Created on : 06/05/2016, 21:03:49
+    Document   : ErroGenerico
+    Created on : 16/05/2016, 14:26:19
     Author     : AX4B
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="ErroGenerico.jsp"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,15 +27,7 @@
             </header>
 
             <section id="corpo">
-                <p id="tituloGeraRelatorio">Gerar Relatorio</p>
-                <form method="post" action="GeraRelatorioServlet">
-                    <select name="tipoRelatorio">
-                        <option value="listarProdutos" selected="selected">Listar Produtos</option>
-                        <option value="listarFuncionarios">Listar Funcionários</option>
-                        <option value="listarMovimentacoes">Listar Movimentações</option>
-                    </select>
-                    <input type="submit" value='Pesquisar'/>
-                </form>               
+                <p>Erro na operação</p>     
             </section>
 
             <aside id="menuLateral">

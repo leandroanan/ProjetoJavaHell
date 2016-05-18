@@ -63,7 +63,7 @@ footer#rodape p{
 aside#menuLateral{
     display: block;/*Mostrar a aside como um block*/
     width: 50px;
-    float: left;/*flutua para o bloco para o lado direito*/
+    float: left;/*flutua para o bloco para o lado esquerdo*/
     padding: 10px;
     margin-top: -710px;
     margin-right: 3px;

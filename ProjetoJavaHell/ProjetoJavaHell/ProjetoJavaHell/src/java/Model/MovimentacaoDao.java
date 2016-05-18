@@ -7,8 +7,10 @@ package Model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,7 +26,17 @@ public class MovimentacaoDao {
     private PreparedStatement prepareStmt;
     private Statement state;
     private String operador;
+    private ArrayList<String> movimentacao;
+    private ResultSet resultSet;
+    
+    public MovimentacaoDao() {
+        this.movimentacao = new ArrayList();
+    }
 
+    public ArrayList<String> getMovimentacao() {
+        return movimentacao;
+    }
+    
     public String getTipo_movimentacao() {
         return tipo_movimentacao;
     }
@@ -107,5 +119,29 @@ public class MovimentacaoDao {
             Conexao.fechaConexao(this.conn);
         }
     }    
+    
+    //SELECIONA LISTA DE MOVIMENTAÇÕES NO ARRAYLIST
+    public void insereListaMovimentacao() throws SQLException{
+        try{
+            this.conn = Conexao.abreConexao();
+            this.sql = "SELECT * from MOVIMENTACAO";
+            this.prepareStmt = this.conn.prepareStatement(this.sql);
+            this.resultSet = this.prepareStmt.executeQuery();
+            
+            while(this.resultSet.next()){
+                this.movimentacao.add("Id da movimentação: " + this.resultSet.getString(1)
+                                    + ", Tipo de Movimentação: " + this.resultSet.getString(2)
+                                    + ", Id do funcionário: " + this.resultSet.getString(3)
+                                    + ", Id do produto: " + this.resultSet.getString(4));
+            }
+        }
+        catch(Exception e){
+            System.out.println("\nErro ao selecionar lista de movimentações: " + e);
+        }
+        finally{
+            this.prepareStmt.close();
+            Conexao.fechaConexao(conn);
+        }
+    }
     
 }
